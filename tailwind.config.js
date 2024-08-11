@@ -8,6 +8,9 @@ export default {
     extend: {
       colors:{
         bgColor: "#f7f7f7"
+      },
+      aspectRatio:{
+        '3/2':'3 / 2',
       }
     },
   },
