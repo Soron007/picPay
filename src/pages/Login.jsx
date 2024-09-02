@@ -1,21 +1,42 @@
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import axios from 'axios';
 
 
 const Login = () => {
 
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(import.meta.env.VITE_API_URL + "/login", {
+                email,
+                password,
+            })
 
+            const data = await response.data;
+            console.log(data);
+            if (data) {
+                toast.success(data.message);
+                navigate("/");
+            }
+
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
+
+    }
 
     return (
         <div className="mt-20 sm:mt-10 min-h-screen flex items-center justify-center w-full ">
             <div className="bg-white shadow-md rounded-3xl px-5 py-6 w-full sm:w-[27vw]">
                 <h1 className="text-2xl font-bold text-center mb-4">Let's Connect!</h1>
-                <form>
+                <form onSubmit={handleLogin}>
                     {/* For email */}
                     <div className="mb-4">
                         <label

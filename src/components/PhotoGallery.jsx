@@ -5,7 +5,7 @@ import { IoIosHeart } from "react-icons/io";
 
 const PhotoGallery = () => {
     return (
-        <div className="my-20 bg-white flex flex-col justify-center items-center">
+        <div className="-mt-[20px] -my-20 bg-white flex flex-col justify-center items-center">
             <h3 className="text-3xl font-semibold my-14">Photos</h3>
 
             {/* All my photos listed in this div */}
