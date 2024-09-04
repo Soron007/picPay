@@ -10,9 +10,11 @@ const HeroSection = () => {
 
             <form className="absolute flex justify-center items-center">
                 <input type="search" id="search" name="search" className="sm:rounded-3xl py-5 px-3 w-[80vw] sm:w-[40vw] text-xl sm:text-3xl mx-auto outline-none border-b-2 bg-bgColor/[0.3] border-pink-600 focus:border-blue-700 placeholder:text-black
+                placeholder:text-sm 
+                sm:placeholder:text-3xl
                 focus:bg-white/[0.8]
                 " placeholder="Search your image..." />
-                <IoIosSearch className="text-3xl sm:text-5xl text-gray-400 -ml-[50px]" />
+                <IoIosSearch className="text-3xl sm:text-5xl text-gray-400 -ml-[50px] absolute right-2" />
             </form>
 
         </div>
