@@ -4,8 +4,13 @@ const HeroSection = () => {
     return (
         <div className="sm:w-full h-[400px] overflow-clip mx-auto flex justify-center items-center">
 
-            <div className="w-full h-full">
-                <img src="https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="pic" className="w-full h-full overflow-hidden object-fill" />
+            <div className="w-full h-full" style={{
+                backgroundImage: "url('https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPositionY: "-100px"
+            }}>
+                {/* <img src="https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="pic" className="w-full h-full overflow-hidden object-fill" /> */}
             </div>
 
             <form className="absolute flex justify-center items-center">
@@ -14,7 +19,7 @@ const HeroSection = () => {
                 sm:placeholder:text-3xl
                 focus:bg-white/[0.8]
                 " placeholder="Search your image..." />
-                <IoIosSearch className="text-3xl sm:text-5xl text-gray-400 -ml-[50px] absolute right-2" />
+                <IoIosSearch className="text-3xl sm:text-5xl text-black/[0.3] -ml-[50px] absolute right-2" />
             </form>
 
         </div>
