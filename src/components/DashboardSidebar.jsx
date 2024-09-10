@@ -22,7 +22,7 @@ const DashboardSidebar = () => {
 
 
     return (
-        <nav className={`fixed z-10 ${!sidebar == true ? "-translate-x-[500px] sm:translate-x-0" : "translate-x-0"} flex text-lg font-semibold bg-white shadow-lg flex-col w-fit min-h-screen p-3 list-none justify-between items-center`}>
+        <nav className={`fixed z-10 ${!sidebar ? "-translate-x-[500px] sm:translate-x-0" : "translate-x-0"} flex sm:static text-lg font-semibold bg-white shadow-lg flex-col w-fit min-h-screen p-3 list-none justify-between items-center ease-in-out duration-300`}>
             <div>
                 {/* Circle with author's first letter */}
                 <div className='bg-black my-5 w-fit rounded-full py-4 px-6 mx-auto text-white'>
