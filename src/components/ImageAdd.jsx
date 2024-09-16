@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
+import useUpload from '../../hooks/useUpload';
+import {useSelector} from 'react-redux' 
+import ProgressBar from '@ramonak/react-progress-bar'
+
+
 const ImageAdd = () => {
 
     const [image, setImage] = useState(null);
@@ -11,6 +16,10 @@ const ImageAdd = () => {
         setImage(file);
 
     }
+
+    const author = useSelector((state)=> state.auth.author)
+
+    const onUploadProgress = (progressEvent) => setProgress(Math.round((progressEvent.loaded * 100)/progressEvent.total ))
 
     const addPost = async(e) => {
         e.preventDefault();
@@ -26,6 +35,33 @@ const ImageAdd = () => {
             if(title.trim == "" || price.trim == ""){
                 return toast.error("Please fill all the fields");
             }
+
+
+            const {public_id, secure_url} = await useUpload({image, onUploadProgress}); 
+
+            if(!public_id || !secure_url) return toast.error("image upload failed");
+
+            const res = await axios.post(import.meta.env.VITE_API_URL + '/post/create',
+                {
+                    title, price, image: secure_url, public_id: public_id,
+                    author: author
+                },
+                {
+                    headers: {
+                        "Authorization" : "Bearer "+ localStorage.getItem("accessToken")
+                    },
+                }
+            );
+            
+            const data = await res.data;
+
+            if(data.success === true){
+                toast.success(data.message);
+                e.target.reset();
+                setImage(null);
+                setProgress(0);
+            }
+
         } catch (error) {
             return toast.error(error.response.data.message);
         }
@@ -37,6 +73,14 @@ const ImageAdd = () => {
         <h2 className='text-2xl font-bold'>Add New Image</h2>
         <form className='grid grid-cols-1 gap-2 my-4' onSubmit={addPost}>
             <img src={`${image? URL.createObjectURL(image): "https://tse4.mm.bing.net/th?id=OIP.RpGnDfUGMlzdJNd_WABZRAHaEe&pid=Api&P=0&h=180"}`} alt="dummy" className='w-[350px] h-[25vh] sm:h-[30vh] rounded-lg object-cover'/>
+
+
+            {/* Show a progress bar */}
+
+            {
+              progress > 0 &&  <ProgressBar completed={progress} bgColor='black' transitionTimingFunction='ease-in-out'/>
+            }
+
             <div className='flex flex-col'>
                 <label htmlFor="image" className='font-bold'>Upload Image</label>
                 <input onChange={handleImageChange} type="file" id='image' name='image' className='rounded-lg border outline-none px-3 py-1 mt-1'/>

@@ -105,6 +105,7 @@ const Signup = () => {
               Select Your Accont Type
             </label>
             <select
+            value={accountType}
               onChange={(e) => setAccountType(e.target.value)}
               className="shadow-md rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-black focus:border-black"
             >
