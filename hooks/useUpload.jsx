@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+
+
 const useUpload = async({image, onUploadProgress}) => {
 
     const upload = async () => {
@@ -18,7 +20,7 @@ const useUpload = async({image, onUploadProgress}) => {
                 withCredentials: false,
             }
 
-            const res = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`)
+            const res = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`, formData, config)
 
             const data = await res.data;
 

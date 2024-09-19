@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import useUpload from '../../hooks/useUpload';
 import {useSelector} from 'react-redux' 
 import ProgressBar from '@ramonak/react-progress-bar'
+import axios from 'axios';
 
 
 const ImageAdd = () => {
@@ -15,7 +16,9 @@ const ImageAdd = () => {
 
         setImage(file);
 
-    }
+    };
+
+    console.log("Upload preset is: ", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET)
 
     const author = useSelector((state)=> state.auth.author)
 
@@ -43,7 +46,7 @@ const ImageAdd = () => {
 
             const res = await axios.post(import.meta.env.VITE_API_URL + '/post/create',
                 {
-                    title, price, image: secure_url, public_id: public_id,
+                    title, price, image: secure_url, publicId: public_id,
                     author: author
                 },
                 {
@@ -63,6 +66,7 @@ const ImageAdd = () => {
             }
 
         } catch (error) {
+            console.log(error)
             return toast.error(error.response.data.message);
         }
     }
