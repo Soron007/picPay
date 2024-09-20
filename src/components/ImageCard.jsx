@@ -1,6 +1,8 @@
 
 
 const ImageCard = ({id, img, title, price,author,icon1,icon2}) => {
+
+    console.log(author)
     return (
         <div className="rounded-lg bg-slate-800/[0.2] shadow-lg p-3">
             <div className="w-full h-[200px] overflow-hidden rounded-lg">
