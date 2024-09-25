@@ -7,6 +7,7 @@ import BuyerDashboard from './pages/BuyerDashboard';
 import Navbar from "./components/Navbar";
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
+import GsapTransition from "./components/GsapTransition";
 
 export default function App() {
   return (
@@ -14,13 +15,14 @@ export default function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Navbar />
-          <Routes>
+          {/* <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/seller/profile" element={<SellerDashboard />} />
             <Route path="/buyer/profile" element={<BuyerDashboard />} />
-          </Routes>
+          </Routes> */}
+          <GsapTransition/>
         </BrowserRouter>
       </Provider>
     </>
