@@ -1,12 +1,41 @@
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {login, logout} from '../../store/slices/authSlice';
+import axios from 'axios';
+import { useEffect } from "react";
 
 const Navbar = () => {
 
+  const dispatch = useDispatch();
   
   const { pathname } = useLocation();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const role = useSelector((state) => state.auth.role);
+
+  const refreshToken = async () => {
+    try {
+      const res = await axios.get(import.meta.env.VITE_API_URL + "/refresh", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("refreshToken")
+        }
+      });
+      const data = await res.data;
+      dispatch(login(data));
+    } catch (error) {
+      console.log(error)
+      dispatch(logout())
+    }
+  };
+
+  useEffect(()=> {
+    const interval = setInterval(()=> {
+        refreshToken()
+    }, 1000 * 60 * 5) //13 minute interval
+
+    return ()=> {
+      clearInterval(interval);
+    }
+  }, [])
 
   return (
     <nav
