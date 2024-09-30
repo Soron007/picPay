@@ -1,3 +1,4 @@
+import Analytics from "../components/Analytics"
 import DashboardSidebar from "../components/DashboardSidebar"
 import PhotoManagement from "../components/seller/PhotoManagement"
 
@@ -7,7 +8,7 @@ const SellerDashboard = () => {
             <DashboardSidebar/>
             <div>
             {/* we will change the pages through switch case */}
-            <PhotoManagement/>
+            <Analytics/>
 
             </div>
         </div>
