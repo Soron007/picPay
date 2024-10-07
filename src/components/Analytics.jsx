@@ -99,6 +99,7 @@ const Analytics = () => {
         <ExpenseCard/>
         <ExpenseCard/>
         <ExpenseCard/>
+        
       </div>
       
     </div>

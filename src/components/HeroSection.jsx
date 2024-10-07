@@ -1,29 +1,57 @@
 import { IoIosSearch } from "react-icons/io";
-
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setAllPosts } from "../../store/slices/postSlice";
 const HeroSection = () => {
-    return (
-        <div className="sm:w-full h-[400px] overflow-clip mx-auto flex justify-center items-center">
+  const dispatch = useDispatch();
 
-            <div className="w-full h-full" style={{
-                backgroundImage: "url('https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundPositionY: "-100px"
-            }}>
-                {/* <img src="https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="pic" className="w-full h-full overflow-hidden object-fill" /> */}
-            </div>
+  const handleSearch = async (e) => {
+    try {
+      const search = e.target.value;
+      const res = await axios.get(
+        import.meta.env.VITE_API_URL + `/post/search?search=${search}`
+      );
 
-            <form className="absolute flex justify-center items-center">
-                <input type="search" id="search" name="search" className="sm:rounded-3xl py-5 px-3 w-[80vw] sm:w-[40vw] text-xl sm:text-3xl mx-auto outline-none border-b-2 bg-bgColor/[0.3] border-pink-600 focus:border-blue-700 placeholder:text-black
+      const { data } = await res.data;
+
+      dispatch(setAllPosts(data));
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
+
+  return (
+    <div className="sm:w-full h-[400px] overflow-clip mx-auto flex justify-center items-center">
+      <div
+        className="w-full h-full"
+        style={{
+          backgroundImage:
+            "url('https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPositionY: "-100px",
+        }}
+      >
+        {/* <img src="https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="pic" className="w-full h-full overflow-hidden object-fill" /> */}
+      </div>
+
+      <form className="absolute flex justify-center items-center">
+        <input
+          type="search"
+          id="search"
+          name="search"
+          className="sm:rounded-3xl py-5 px-3 w-[80vw] sm:w-[40vw] text-xl sm:text-3xl mx-auto outline-none border-b-2 bg-bgColor/[0.3] border-pink-600 focus:border-blue-700 placeholder:text-black
                 placeholder:text-sm 
                 sm:placeholder:text-3xl
                 focus:bg-white/[0.8]
-                " placeholder="Search your image..." />
-                <IoIosSearch className="text-3xl sm:text-5xl text-black/[0.3] -ml-[50px] absolute right-2" />
-            </form>
+                "
+          placeholder="Search your image..."
+          onChange={handleSearch}
+        />
+        <IoIosSearch className="text-3xl sm:text-5xl text-black/[0.3] -ml-[50px] absolute right-2" />
+      </form>
+    </div>
+  );
+};
 
-        </div>
-    )
-}
-
-export default HeroSection
+export default HeroSection;
