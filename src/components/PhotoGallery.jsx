@@ -39,6 +39,7 @@ const PhotoGallery = () => {
     if (!isAuthenticated) {
       toast.error("Please login to purchase item");
       navigate("/login");
+      return;
     }
 
     try {
@@ -51,6 +52,7 @@ const PhotoGallery = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
+          withCredentials: true,
         }
       );
 
@@ -99,15 +101,14 @@ const PhotoGallery = () => {
             },
             {
               headers: {
-                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
               },
-              withCredentials: true
+              withCredentials: true,
             }
           );
 
           const data = await res.data;
           toast.success(data.message);
-
         } catch (error) {
           console.log(error);
           toast.error(error.response.data.message);
@@ -133,7 +134,11 @@ const PhotoGallery = () => {
         author={author}
         price={price}
         icon1={
-          <FaShoppingCart title="cart" onClick={()=>purchaseImage(price, _id,image, author, title)} className="text-2xl text-black cursor-pointer hover:scale-110 transition-all ease-linear duration-300" />
+          <FaShoppingCart
+            title="cart"
+            onClick={() => purchaseImage(price, _id, image, author, title)}
+            className="text-2xl text-black cursor-pointer hover:scale-110 transition-all ease-linear duration-300"
+          />
         }
         icon2={
           <IoIosHeart className="text-2xl text-red-500 cursor-pointer hover:scale-110 transition-all ease-linear duration-300" />
