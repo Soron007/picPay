@@ -37,7 +37,7 @@ const Orders = () => {
             <tr className='w-full bg-gray-200 text-gray-600 uppercase text-sm leading-normal'>
               <th className='py-3 px-6 text-left'>ID</th>
               <th className='py-3 px-6 text-left'>Item</th>
-              <th className='py-3 px-6 text-left'>Name</th>
+              <th className='py-3 px-6 text-left'>{role === "seller"? "Purchaser": "Author"} Name</th>
               <th className='py-3 px-6 text-left'>Date</th>
               <th className='py-3 px-6 text-left'>Price</th>
             </tr>
@@ -48,7 +48,7 @@ const Orders = () => {
                 <tr key={order.razorpayOrderId} className='border-b border-gray-200 hover:bg-gray-100'>
                   <td className='py-3 px-6 text-left'>{order.razorpayOrderId}</td>
                   <td className='py-3 px-6 text-left'>{order.title}</td>
-                  <td className='py-3 px-6 text-left'>{order.author.charAt(0).toUpperCase() + order.author.slice(1)}</td>
+                  <td className='py-3 px-6 text-left'>{role === "buyer"? order.author.charAt(0).toUpperCase() + order.author.slice(1): order.purchaser.charAt(0).toUpperCase() + order.purchaser.slice(1) }</td>
                   <td className='py-3 px-6 text-left'>{order.createdAt}</td>
                   <td className='py-3 px-6 text-left'>Rs {order.price}</td>
                 </tr>
