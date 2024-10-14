@@ -23,6 +23,18 @@ const Orders = () => {
     dispatch(setOrders(data));
   };
 
+  const formatDate = (date) => {
+    const newDate = new Date(date);
+    console.log(newDate)
+    return newDate.toLocaleDateString("en-us", {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    });
+  }
+  
+
   useEffect(() => {
     getOrders();
   }, []);
@@ -46,10 +58,10 @@ const Orders = () => {
              {
               orders?.map((order)=> (
                 <tr key={order.razorpayOrderId} className='border-b border-gray-200 hover:bg-gray-100'>
-                  <td className='py-3 px-6 text-left'>{order.razorpayOrderId}</td>
+                  <td className='py-3 px-6 text-left'>{order.razorpayOrderId.split("_")[1]}</td>
                   <td className='py-3 px-6 text-left'>{order.title}</td>
                   <td className='py-3 px-6 text-left'>{role === "buyer"? order.author.charAt(0).toUpperCase() + order.author.slice(1): order.purchaser.charAt(0).toUpperCase() + order.purchaser.slice(1) }</td>
-                  <td className='py-3 px-6 text-left'>{order.createdAt}</td>
+                  <td className='py-3 px-6 text-left'>{formatDate(order.createdAt)}</td>
                   <td className='py-3 px-6 text-left'>Rs {order.price}</td>
                 </tr>
               ))
