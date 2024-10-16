@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setOrders} from '../../store/slices/orderSlice'
 import DashboardHeader from './DashboardHeader';
 import { useEffect } from 'react';
+import DashboardSidebar from './DashboardSidebar';
 
 
 const Orders = () => {

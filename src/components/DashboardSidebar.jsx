@@ -10,6 +10,7 @@ import { logout, login } from "../../store/slices/authSlice";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+
 const DashboardSidebar = () => {
   const { pathname } = useLocation();
 
@@ -93,7 +94,7 @@ const DashboardSidebar = () => {
           }`}
           onClick={() => dispatch(setTab("favorites"))}
         >
-          <IoIosHeart /> Favorites
+          <IoIosHeart />Favorites
         </li>
 
         <Link
