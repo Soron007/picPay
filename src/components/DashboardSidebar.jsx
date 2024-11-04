@@ -74,7 +74,7 @@ const DashboardSidebar = () => {
           className={`w-full rounded-lg px-2 hover:bg-black hover:text-white transition-all ease-linear cursor-pointer duration-300 hover:scale-105 flex items-center sm:text-[15px] text-lg gap-2 justify-start ${
             tab === "photo-analytics" && "bg-black text-white"
           }`}
-          onClick={() => dispatch(setTab("photo-analytics"))}
+          onClick={() => dispatch(setTab("analytics"))}
         >
           <SiGoogleanalytics /> Analytics
         </li>

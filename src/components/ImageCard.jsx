@@ -6,7 +6,7 @@ const ImageCard = React.memo(
 
     return (
       <div className="rounded-lg bg-slate-800/[0.2] shadow-lg p-3">
-        <div className="w-full h-[200px] overflow-hidden rounded-lg">
+        <div className="w-[250px] h-[200px] overflow-hidden rounded-lg">
           <img
             src={img}
             alt="asset"
